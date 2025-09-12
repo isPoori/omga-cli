@@ -4,7 +4,9 @@
 It combines **local checks** (syntax, linting, project scaffolding) with the power of **OMGA**, giving you a smart, minimal, and developer-friendly workflow.
 
 ---
+<div align="center">
 [![PyPI Downloads](https://static.pepy.tech/personalized-badge/omga-cli?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/omga-cli)
+</div>
 ---
 
 ## ✨ Features
