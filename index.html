@@ -3,14 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <title>omga-cli</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Fira Code", monospace;
+      background: #0f0f0f;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+      background: linear-gradient(90deg, #61dafb, #f39c12, #9b59b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGlow 3s infinite alternate;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 10px #61dafb; }
+      to { text-shadow: 0 0 25px #f39c12; }
+    }
+
+    p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .code-box {
+      background: #1e1e1e;
+      padding: 15px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      margin: 20px auto;
+      font-size: 1rem;
+      box-shadow: 0 0 20px rgba(97, 218, 251, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .links a {
+      color: #61dafb;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #f39c12;
+    }
+
+    /* پس‌زمینه متحرک */
+    .matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f0f0f;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <h1>🚀 omga-cli</h1>
-  <p>A modern and lightweight CLI package for developers.</p>
-  <p>📦 Install from PyPI:</p>
-  <pre><code>pip install omga-cli</code></pre>
-  <p>🔗 <a href="https://pypi.org/project/omga-cli/">View on PyPI</a></p>
-  <p>🔗 <a href="https://github.com/isPoori/omga-cli">View on GitHub</a></p>
+  <div class="matrix">
+    <canvas id="matrix"></canvas>
+  </div>
+
+  <header>
+    <h1>🚀 omga-cli</h1>
+    <p>A modern, lightweight Python CLI package for developers</p>
+
+    <div class="code-box">
+      <code>pip install omga-cli</code>
+    </div>
+
+    <div class="links">
+      <a href="https://pypi.org/project/omga-cli/" target="_blank">📦 PyPI</a>
+      <a href="https://github.com/isPoori/omga-cli" target="_blank">💻 GitHub</a>
+    </div>
+  </header>
+
+  <script>
+    // انیمیشن ماتریکس پس‌زمینه
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01 Python CLI >>>>>>".split("");
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0f0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+          drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 35);
+
+    // ریسایز واکنش‌گرا
+    window.addEventListener("resize", () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
 </body>
 </html>
 
