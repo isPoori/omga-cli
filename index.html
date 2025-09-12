@@ -2,143 +2,210 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>omga-cli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ omga-cli ⚡</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: "Fira Code", monospace;
-      background: #0f0f0f;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      padding: 80px 20px;
-      position: relative;
+      font-family: 'Roboto Mono', monospace;
+      background: #0d0d0d;
+      color: #e5e5e5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
     }
-
-    h1 {
-      font-size: 3rem;
-      margin: 0;
-      background: linear-gradient(90deg, #61dafb, #f39c12, #9b59b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: textGlow 3s infinite alternate;
-    }
-
-    @keyframes textGlow {
-      from { text-shadow: 0 0 10px #61dafb; }
-      to { text-shadow: 0 0 25px #f39c12; }
-    }
-
-    p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-
-    .code-box {
-      background: #1e1e1e;
-      padding: 15px 20px;
-      border-radius: 8px;
-      display: inline-block;
-      margin: 20px auto;
-      font-size: 1rem;
-      box-shadow: 0 0 20px rgba(97, 218, 251, 0.3);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .links a {
-      color: #61dafb;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    .links a:hover {
-      color: #f39c12;
-    }
-
-    /* پس‌زمینه متحرک */
-    .matrix {
+    canvas#matrix {
       position: fixed;
       top: 0;
       left: 0;
+      z-index: -1;
       width: 100%;
       height: 100%;
-      background: #0f0f0f;
-      z-index: -1;
-      overflow: hidden;
+      background: #0d0d0d;
     }
-
-    canvas {
-      display: block;
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+    .terminal {
+      background: rgba(15, 15, 20, 0.9);
+      border: 1px solid #2a2a3b;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.95rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .copy-btn {
+      transition: all 0.3s ease;
+    }
+    .copy-btn.copied {
+      background-color: #4ade80 !important;
+      color: #1a1a1a !important;
+    }
+    .link-box {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid #2a2a3b;
+      border-radius: 6px;
+      background: rgba(17,17,26,0.9);
+      transition: all 0.3s ease;
+    }
+    .link-box:hover {
+      border-color: #00ffa6;
+      background: rgba(28,28,40,0.95);
+      transform: translateY(-2px);
+    }
+    /* Demo terminal */
+    #demo-output {
+      min-height: 100px;
+      white-space: pre-line;
+      font-size: 0.9rem;
+    }
+    #demo-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      color: #4ade80;
     }
   </style>
 </head>
 <body>
-  <div class="matrix">
-    <canvas id="matrix"></canvas>
-  </div>
 
-  <header>
-    <h1>🚀 omga-cli</h1>
-    <p>A modern, lightweight Python CLI package for developers</p>
+  <!-- Matrix background -->
+  <canvas id="matrix"></canvas>
 
-    <div class="code-box">
-      <code>pip install omga-cli</code>
-    </div>
-
-    <div class="links">
-      <a href="https://pypi.org/project/omga-cli/" target="_blank">📦 PyPI</a>
-      <a href="https://github.com/isPoori/omga-cli" target="_blank">💻 GitHub</a>
-    </div>
+  <!-- Header -->
+  <header class="p-5 flex justify-between items-center">
+    <h1>omga-cli</h1>
   </header>
 
+  <!-- Hero -->
+  <main class="flex flex-col items-center justify-center flex-1 px-4 text-center">
+    <p class="text-2xl mb-6">
+      <span id="typed"></span><span class="text-green-400">|</span>
+    </p>
+
+    <!-- Install Box -->
+    <div class="terminal mx-auto max-w-lg mb-8 flex items-center justify-between">
+      <code class="text-green-400">$ pip install omga-cli</code>
+      <button id="copyBtn"
+        onclick="copyToClipboard('pip install omga-cli')"
+        class="ml-4 bg-green-500 hover:bg-green-600 text-black px-3 py-1 rounded copy-btn">
+        Copy
+      </button>
+    </div>
+
+    <!-- Demo Terminal -->
+    <section class="w-full max-w-2xl mb-12">
+      <h2 class="text-xl font-bold mb-4">Live Demo</h2>
+      <div class="terminal text-left">
+        <div id="demo-output" class="text-green-400 mb-2"></div>
+        <div class="flex">
+          <span class="text-green-400 mr-2">$</span>
+          <input id="demo-input" type="text"
+                 placeholder="Type a command like 'omga-cli --help'"
+                 onkeypress="handleDemoInput(event)">
+        </div>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <div class="flex space-x-6">
+      <a href="https://pypi.org/project/omga-cli/" class="link-box text-green-300">📦 PyPI</a>
+      <a href="https://github.com/ispoori/omga-cli" class="link-box text-green-300">💻 GitHub</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 text-center text-gray-400 text-sm">
+    © 2025 omga-cli. Built with ❤️ by Pouria Hosseini.
+  </footer>
+
   <script>
-    // انیمیشن ماتریکس پس‌زمینه
+    // Typed.js
+    var typed = new Typed('#typed', {
+      strings: [
+        'A modern Python CLI for developers',
+        'Empower your terminal with smart tools',
+        'Build faster. Code smarter.'
+      ],
+      typeSpeed: 45,
+      backSpeed: 25,
+      loop: true
+    });
+
+    // Copy Button
+    function copyToClipboard(text) {
+      const btn = document.getElementById('copyBtn');
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerText = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.innerText = "Copy";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    }
+
+    // Demo Commands
+    const demoCommands = {
+      "omga-cli --help": "omga-cli v1.0\n\nCommands:\n  init - Initialize project\n  build - Build artifacts\n  deploy - Deploy to cloud\n  clear - Clear terminal",
+      "omga-cli init": "Initializing project...\n✔ Project initialized successfully.",
+      "omga-cli build": "Building...\n✔ Build completed.",
+      "omga-cli deploy": "Deploying...\n✔ Deployment successful."
+    };
+
+    function handleDemoInput(event) {
+      if (event.key === 'Enter') {
+        const input = document.getElementById('demo-input').value.trim();
+        if (input === "clear") {
+          document.getElementById('demo-output').innerHTML = "";
+        } else {
+          const output = demoCommands[input] || "❌ Command not found. Try 'omga-cli --help'";
+          document.getElementById('demo-output').innerHTML += `$ ${input}\n${output}\n\n`;
+        }
+        document.getElementById('demo-input').value = '';
+      }
+    }
+
+    // Matrix background effect
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
 
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    const letters = "01 Python CLI >>>>>>".split("");
+    const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヰヱヲンabcdefghijklmnopqrstuvwxyz0123456789";
     const fontSize = 14;
     const columns = canvas.width / fontSize;
 
-    const drops = [];
-    for (let x = 0; x < columns; x++) drops[x] = 1;
+    const drops = Array(Math.floor(columns)).fill(1);
 
     function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#0f0";
+      ctx.fillStyle = "#00ff88";
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
+        }
         drops[i]++;
       }
     }
 
-    setInterval(draw, 35);
+    setInterval(draw, 40);
 
-    // ریسایز واکنش‌گرا
     window.addEventListener("resize", () => {
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
@@ -146,4 +213,3 @@
   </script>
 </body>
 </html>
-
