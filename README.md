@@ -1,78 +1,135 @@
-# omga-cli
+# 🚀 omga-cli
 
-**omga-cli** is an advanced, AI-powered command-line assistant built for developers.  
-It combines **local checks** (syntax, linting, project scaffolding) with the power of **OMGA**, giving you a smart, minimal, and developer-friendly workflow.
+**omga-cli** is an AI-powered command-line assistant for developers. It provides intelligent code analysis, explanations, fixes, and more with a beautiful interface.
 
 ---
 <div align="center">
 <a href="https://pepy.tech/projects/omga-cli"><img src="https://static.pepy.tech/personalized-badge/omga-cli?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads" alt="PyPI Downloads"></a>
 </div>
-
+---
 
 ## ✨ Features
 
-- ✅ Syntax & lint checks (`check file.py`)
-- 🤖 AI explanations & Q&A (`explain`, `ask`)
-- 🔧 Auto-fixes with diff previews (`fix --apply`)
-- ⚡ Run shell commands safely (`run "ls -la"`)
-- 🚀 Project scaffolding (e.g., FastAPI starter)
-- 📚 Snippet management (`snippet add/list`)
-- 💡 Interactive mode with **Tab-completion** (static + AI suggestions)
+- 🔍 **Code Analysis** - Syntax checking, linting, error detection
+- 🤖 **AI Assistant** - Code explanations, fixes, improvements, documentation
+- 🎨 **Beautiful UI** - Rich, colorful terminal interface
+- ⚡ **Fast & Smart** - Cached responses, progress indicators, tab completion
+- 🚀 **Project Tools** - Scaffolding, snippets, shell commands
 
 ---
 
-## 🚀 Quickstart
+## 🚀 Quick Start
 
+### Installation
 ```bash
-# 1. Install omga-cli
 pip install omga-cli
+```
 
-# 2. Run in interactive mode
+### Usage
+```bash
+# Interactive mode
 omga-cli
 
-# Or run a one-shot command
-omga-cli <command>
+# Direct commands
+omga-cli check file.py
+omga-cli explain file.py
+omga-cli ask "How to optimize Python code?"
 ```
 
 ---
 
-## 🖥️ Example Usage
+## 📋 Commands
+
+| Command | Description |
+|---------|-------------|
+| `check <file>` | Check syntax and linting |
+| `explain <file>` | Get AI code explanation |
+| `ask <question>` | Ask AI questions |
+| `fix <file>` | Fix code issues |
+| `improve <file>` | Get improvement suggestions |
+| `docs <file>` | Generate documentation |
+| `run <command>` | Run shell commands |
+| `generate project <template> <name>` | Create new project |
+| `snippet add/list/remove` | Manage code snippets |
+| `config` | Show configuration |
+| `status` | Show system status |
+| `help` | Show help |
+
+---
+
+## 🎯 Examples
 
 ```bash
-# Check syntax
-omga-cli check file.py
-# → "Syntax OK" or error list
+# Check your code
+omga-cli check main.py
 
-# Explain code
-omga-cli explain file.py
-# → "This code does X, but watch for Y pitfall."
+# Get detailed explanation
+omga-cli explain main.py
 
-# Ask general AI question
-omga-cli ask "how to use pandas?"
+# Ask for help
+omga-cli ask "What's the best way to handle errors in Python?"
 
-# Fix code with AI suggestions
-omga-cli fix file.py --apply
+# Fix issues automatically
+omga-cli fix main.py
 
-# Scaffold a FastAPI project
+# Generate FastAPI project
 omga-cli generate project fastapi myapp
 
-# Manage code snippets
-omga-cli snippet add hello "print('Hello World')"
-omga-cli snippet list
+# Interactive mode
+omga-cli
+> check file.py
+> explain file.py
+> ask "How can I improve this?"
+> exit
 ```
 
 ---
 
-## 🔒 Security Note
+## ⚙️ Configuration
 
-The `run` command executes **local shell commands** directly.  
-⚠️ Use it only with trusted commands. No sandboxing is provided.
+Configuration is stored in `~/.omga_cli/config.json`. You can customize:
+
+- **UI Settings**: Themes, colors, progress indicators
+- **AI Settings**: Model, temperature, response length
+- **Features**: Auto-fix, caching, smart completion
+- **Security**: Confirmation prompts, safe mode
+
+---
+
+## 🛡️ Security
+
+- ✅ **Built-in API Key** - No setup required
+- 🔒 **Safe Execution** - Confirmation for destructive operations
+- ⏱️ **Timeouts** - Prevents hanging commands
+- 🚫 **No Data Collection** - All processing via your API
+
+---
+
+## 🐛 Troubleshooting
+
+**Permission Errors**
+```bash
+chmod 755 ~/.omga_cli
+```
+
+**Import Errors**
+```bash
+pip install --upgrade omga-cli
+```
+
+**Debug Mode**
+```bash
+export OMGA_DEBUG=1
+omga-cli check file.py
+```
 
 ---
 
 ## 👨‍💻 Author
 
-Developed with ❤️ by **Pouria Hosseini**  
-📧 Contact: [PouriaHosseini@Outlook.com](mailto:PouriaHosseini@Outlook.com)
+**Pouria Hosseini**  
+📧 [PouriaHosseini@Outlook.com](mailto:PouriaHosseini@Outlook.com)
 
 ---
+
+**Happy coding! 🎉**
