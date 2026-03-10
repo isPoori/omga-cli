@@ -4,12 +4,10 @@
 It connects to [Omga Ai](https://OmgaAi.ir) and provides intelligent code analysis, explanations, fixes, documentation, and project scaffolding — all inside your terminal.
 
 ---
-
 <div align="center">
 <a href="https://pepy.tech/projects/omga-cli"><img src="https://static.pepy.tech/personalized-badge/omga-cli?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads" alt="PyPI Downloads"></a>
 </div>
 
----
 
 ## ✨ Features
 
